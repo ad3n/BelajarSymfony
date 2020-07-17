@@ -18,6 +18,12 @@ class Todo
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity=Category::class)
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     */
+    private $category;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $activity;
@@ -35,6 +41,18 @@ class Todo
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
     }
 
     public function getActivity(): ?string
