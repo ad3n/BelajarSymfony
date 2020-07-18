@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Todo;
 use App\Repository\TodoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,7 +27,10 @@ class TodoController extends AbstractController
      */
     public function addTodo()
     {
+        $category = $this->getDoctrine()->getRepository(Category::class)->find(1);
+
         $todo = new Todo();
+        $todo->setCategory($category);
         $todo->setActivity('Belajar Symfony');
         $this->getDoctrine()->getManager()->persist($todo);
         $this->getDoctrine()->getManager()->flush();
